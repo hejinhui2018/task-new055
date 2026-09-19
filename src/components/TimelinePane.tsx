@@ -85,6 +85,12 @@ function SegmentRow({ seg, isOnAir, hasConflict, dispatch }: SegmentRowProps) {
         <span className={`chip ${seg.origin === 'manual' ? 'chip--manual' : ''}`}>
           {seg.origin === 'manual' ? '✍️ 人工' : '🤖 机器'}
         </span>
+        {seg.speaker && <span className="chip chip--speaker">🎙 {seg.speaker}</span>}
+        {seg.glossaryApplied.length > 0 && (
+          <span className="chip chip--term" title={`已应用术语：${seg.glossaryApplied.join('、')}`}>
+            📗 术语 ×{seg.glossaryApplied.length}
+          </span>
+        )}
         {isOnAir && <span className="chip chip--live">▶ 播出中</span>}
         {seg.locked && <span className="chip chip--locked">🔒 已锁定</span>}
         {hasConflict && <span className="chip chip--danger">⚠️ 冲突待裁决</span>}

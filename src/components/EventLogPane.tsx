@@ -10,6 +10,9 @@ const KIND_META: Record<LogKind, { icon: string; label: string; className: strin
   manual: { icon: '✍️', label: '人工修改', className: 'log--manual' },
   lock: { icon: '🔒', label: '锁定', className: 'log--manual' },
   resolved: { icon: '✅', label: '裁决', className: 'log--ok' },
+  'glossary-applied': { icon: '📗', label: '术语应用', className: 'log--ok' },
+  'glossary-undo': { icon: '↩️', label: '术语撤销', className: 'log--manual' },
+  'glossary-redo': { icon: '↪️', label: '术语重做', className: 'log--ok' },
 }
 
 /** 事件流：所有接收与裁决动作的审计记录，最新在最上。 */

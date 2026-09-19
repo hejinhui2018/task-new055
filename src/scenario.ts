@@ -17,26 +17,28 @@ export const SCENARIO_TITLE = '网络抖动演练：乱序 · 重复 · 晚到 �
 export const SCENARIO: ScheduledEvent[] = [
   {
     at: 0,
-    event: { id: 'evt-101-v1', seq: 101, version: 1, kind: 'create', text: '各位观众晚上好，欢迎收看晚间新闻直播。' },
+    event: { id: 'evt-101-v1', seq: 101, version: 1, kind: 'create', text: '各位观众晚上好，欢迎收看晚间新闻直播。', speaker: '主播A' },
   },
   {
     at: 1500,
-    event: { id: 'evt-103-v1', seq: 103, version: 1, kind: 'create', text: '首先来看今天的主要新闻摘要。' },
+    event: { id: 'evt-103-v1', seq: 103, version: 1, kind: 'create', text: '首先来看今天的主要新闻摘要。', speaker: '主播A' },
   },
   {
     at: 3000,
-    event: { id: 'evt-103-v1', seq: 103, version: 1, kind: 'create', text: '首先来看今天的主要新闻摘要。' },
+    event: { id: 'evt-103-v1', seq: 103, version: 1, kind: 'create', text: '首先来看今天的主要新闻摘要。', speaker: '主播A' },
   },
   {
     at: 4500,
-    event: { id: 'evt-102-v1', seq: 102, version: 1, kind: 'create', text: '现在是北京时间晚上八点整。' },
+    event: { id: 'evt-102-v1', seq: 102, version: 1, kind: 'create', text: '现在是北京时间晚上八点整。', speaker: '主播B' },
   },
   {
     at: 10000,
-    event: { id: 'evt-102-v2', seq: 102, version: 2, kind: 'revision', text: '现在是北京时间晚上八点零五分。' },
+    event: { id: 'evt-102-v2', seq: 102, version: 2, kind: 'revision', text: '现在是北京时间晚上八点零五分。', speaker: '主播B' },
   },
 ]
 
 export const SCENARIO_HINT =
   '场景：#101 → #103 → #103（重复）→ #102（晚到）→ #102 的机器修订 v2。' +
-  '提示：在 #102 补齐后点击「⏸ 暂停」，修改并锁定 #102，再继续播放，即可观察锁定冲突的人工裁决流程。'
+  '提示：在 #102 补齐后点击「⏸ 暂停」，修改并锁定 #102，再继续播放，即可观察锁定冲突的人工裁决流程。' +
+  '术语校对：上方术语表会扫描全部字幕并解释每条匹配依据，可逐条或批量接受，支持撤销/重做与刷新恢复；' +
+  '试试锁定一条字幕后观察「人工锁定冲突」，或修改术语看旧建议失效重算。'

@@ -346,6 +346,273 @@ body {
   font-weight: 700;
 }
 
+.chip--ok {
+  border-color: var(--ok);
+  color: var(--ok);
+}
+
+.chip--speaker {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.chip--term {
+  border-color: var(--ok);
+  color: var(--ok);
+  background: rgba(63, 185, 80, 0.08);
+}
+
+/* ===== 版本化术语校对布局 ===== */
+
+.grid--glossary {
+  flex: 0 0 38%;
+  min-height: 240px;
+  grid-template-columns: minmax(320px, 1fr) minmax(420px, 1.4fr);
+}
+
+.pane-history {
+  float: right;
+  display: inline-flex;
+  gap: 6px;
+}
+
+.pane-history button {
+  font-size: 11px;
+  padding: 1px 8px;
+}
+
+.hint-small {
+  margin: 0 0 8px;
+  font-size: 12px;
+}
+
+/* 术语表 */
+
+.term-list {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.term-card {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: var(--panel-deep);
+}
+
+.term-card--off {
+  opacity: 0.55;
+}
+
+.term-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.term-pair {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.term-pair code {
+  font-family: 'SF Mono', Consolas, monospace;
+  background: rgba(88, 166, 255, 0.12);
+  padding: 0 6px;
+  border-radius: 4px;
+}
+
+.term-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 4px 0;
+  font-size: 12px;
+}
+
+.term-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.term-actions button {
+  font-size: 12px;
+  padding: 2px 8px;
+}
+
+.btn-danger {
+  color: var(--danger);
+}
+
+.term-form {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border);
+}
+
+.term-form h3 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 1px;
+}
+
+.term-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 10px;
+}
+
+.term-form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.term-form input,
+.term-form select {
+  background: var(--panel-deep);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  padding: 5px 8px;
+  font-size: 13px;
+}
+
+.term-form input:focus,
+.term-form select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.term-form-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* 建议面板 */
+
+.sug-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.sug-batch {
+  margin-left: auto;
+  padding: 4px 12px;
+}
+
+.sug-group {
+  margin-bottom: 10px;
+}
+
+.sug-group h3 {
+  margin: 6px 0;
+  font-size: 13px;
+}
+
+.sug--ok h3 {
+  color: var(--ok);
+}
+
+.sug--lock h3 {
+  color: var(--manual);
+}
+
+.sug--amb h3 {
+  color: var(--warn);
+}
+
+.sug-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sug-card {
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-left-width: 3px;
+  border-radius: 8px;
+  background: var(--panel-deep);
+}
+
+.sug--ok .sug-card {
+  border-left-color: var(--ok);
+}
+
+.sug--lock .sug-card {
+  border-left-color: var(--manual);
+}
+
+.sug--amb .sug-card {
+  border-left-color: var(--warn);
+}
+
+.sug-card--na {
+  border-left-color: var(--border);
+  opacity: 0.85;
+}
+
+.sug-card-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sug-text {
+  margin: 6px 0;
+  font-size: 14px;
+}
+
+.sug-text mark {
+  background: rgba(210, 153, 34, 0.35);
+  color: var(--text);
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+.sug-reason {
+  margin: 4px 0;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.sug-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.na-toggle {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px 0;
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+}
+
 /* ===== 字幕时间线 ===== */
 
 .timeline {
@@ -717,6 +984,10 @@ button[aria-pressed='true'] {
 
   .grid {
     grid-template-columns: 1fr;
+  }
+
+  .grid--glossary {
+    flex-basis: auto;
   }
 
   .pane {
