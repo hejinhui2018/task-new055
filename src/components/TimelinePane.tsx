@@ -30,6 +30,9 @@ export function TimelinePane({ state, onAirSeq, dispatch }: TimelinePaneProps) {
                 seg={seg}
                 isOnAir={seq === onAirSeq}
                 hasConflict={state.conflicts.some((c) => c.seq === seq)}
+                autoMatchCount={
+                  state.scans[seq]?.matches.filter((m) => m.kind === 'auto').length ?? 0
+                }
                 dispatch={dispatch}
               />
             )
@@ -55,10 +58,11 @@ interface SegmentRowProps {
   seg: SubtitleSegment
   isOnAir: boolean
   hasConflict: boolean
+  autoMatchCount: number
   dispatch: (action: ConsoleAction) => void
 }
 
-function SegmentRow({ seg, isOnAir, hasConflict, dispatch }: SegmentRowProps) {
+function SegmentRow({ seg, isOnAir, hasConflict, autoMatchCount, dispatch }: SegmentRowProps) {
   const [editing, setEditing] = useState(false)
   const [draft, setDraft] = useState(seg.text)
 
@@ -88,6 +92,11 @@ function SegmentRow({ seg, isOnAir, hasConflict, dispatch }: SegmentRowProps) {
         {isOnAir && <span className="chip chip--live">▶ 播出中</span>}
         {seg.locked && <span className="chip chip--locked">🔒 已锁定</span>}
         {hasConflict && <span className="chip chip--danger">⚠️ 冲突待裁决</span>}
+        {autoMatchCount > 0 && (
+          <span className="chip chip--term">🧪 {autoMatchCount} 条术语建议</span>
+        )}
+        {seg.speaker && <span className="chip">🎤 {seg.speaker}</span>}
+        {seg.lang && <span className="chip">🌐 {seg.lang}</span>}
         <span className="row-actions">
           {!editing && (
             <button

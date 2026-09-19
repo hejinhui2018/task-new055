@@ -1,4 +1,4 @@
-import type { ConsoleState, SubtitleSegment } from './types'
+import type { ConsoleState, SubtitleSegment, Term, TermMatch } from './types'
 
 /** 派生数据选择器：全部由状态计算，不额外存储，保证 reset 后无残留。 */
 
@@ -58,4 +58,50 @@ export function lockedCount(state: ConsoleState): number {
 
 export function duplicateCount(state: ConsoleState): number {
   return state.log.filter((entry) => entry.kind === 'duplicate').length
+}
+
+/* ===================== 版本化术语校对的派生数据 ===================== */
+
+/** 术语表按 id 排序（确定性展示顺序） */
+export function sortedTerms(state: ConsoleState): Term[] {
+  return Object.values(state.terms).sort((a, b) => a.id.localeCompare(b.id))
+}
+
+/** 全部建议（按片段序号、片段内位置排序），用于术语建议面板 */
+export function allMatches(state: ConsoleState): TermMatch[] {
+  const out: TermMatch[] = []
+  for (const seq of Object.keys(state.scans).map(Number).sort((a, b) => a - b)) {
+    const scan = state.scans[seq]
+    const indexed = scan.matches
+      .filter((m) => m.index !== null)
+      .sort((a, b) => (a.index ?? 0) - (b.index ?? 0))
+    const rest = scan.matches.filter((m) => m.index === null)
+    out.push(...indexed, ...rest)
+  }
+  return out
+}
+
+export function matchesByKind(
+  state: ConsoleState,
+  kind: TermMatch['kind'],
+): TermMatch[] {
+  return allMatches(state).filter((m) => m.kind === kind)
+}
+
+/** 当前全部“可自动建议”的 key，供“批量接受全部”使用 */
+export function allAutoKeys(state: ConsoleState): string[] {
+  return matchesByKind(state, 'auto').map((m) => m.key)
+}
+
+export function termById(state: ConsoleState, id: string): Term | undefined {
+  return state.terms[id]
+}
+
+/** 撤销/重做是否可用（供按钮禁用态） */
+export function canUndo(state: ConsoleState): boolean {
+  return state.past.length > 0
+}
+
+export function canRedo(state: ConsoleState): boolean {
+  return state.future.length > 0
 }
